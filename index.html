@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TetraStore - Toko Pakaian Online</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <a href="#">TetraStore</a>
+            </div>
+            <div class="search-and-category">
+                <div class="category-select">
+                    <label for="categoryFilter" class="sr-only">Filter Kategori</label>
+                    <select id="categoryFilter">
+                        <option value="all">Semua Kategori</option>
+                        <option value="baju">Baju</option>
+                        <option value="celana">Celana</option>
+                        <option value="jaket">Jaket</option>
+                        <option value="topi">Topi</option>
+                    </select>
+                </div>
+                <div class="search-bar">
+                    <label for="searchInput" class="sr-only">Cari Produk</label>
+                    <input type="text" id="searchInput" placeholder="Cari nama atau deskripsi produk...">
+                    <button id="searchButton"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="owner-contact">
+                <a href="https://wa.me/6281234567890?text=Halo%20TetraStore%2C%20saya%20ingin%20bertanya%20tentang%20produk%20Anda." target="_blank" class="contact-us-button">
+                    <i class="fab fa-whatsapp"></i> Contact Us
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="promotion-slider" id="promotionSlider">
+                <div class="slider-wrapper">
+                    <div class="slide">
+                        <img src="Banner.png" alt="Promo 1" class="slide-image">
+                    </div>
+                    <div class="slide">
+                        <img src="https://via.placeholder.com/1200x375/6c757d/FFFFFF?text=Diskon+Terbesar+2" alt="Promo 2" class="slide-image">
+                    </div>
+                    <div class="slide">
+                        <img src="https://via.placeholder.com/1200x375/ADB5BD/333333?text=New+Arrivals+3" alt="Promo 3" class="slide-image">
+                    </div>
+                </div>
+                <button class="slider-nav prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-nav next"><i class="fas fa-chevron-right"></i></button>
+                <div class="slider-dots"></div>
+            </section>
+
+            <section class="products-section">
+                <h2 class="section-title">Produk Kami</h2>
+                <div class="owner-actions-top">
+                    <button id="newProductButton" class="action-button primary" style="display: none;">
+                        <i class="fas fa-plus-circle"></i> Buat Produk Baru
+                    </button>
+                    <button id="toggleSortModeButton" class="action-button secondary" style="display: none;">
+                        <i class="fas fa-arrows-alt-v"></i> Atur Urutan Produk
+                    </button>
+                </div>
+                <div class="products-grid" id="productsGrid">
+                    </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <button id="ownerLoginButton" class="owner-login-button">
+                Login
+            </button>
+            <p>&copy; 2024 TetraStore. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="detailModal" class="modal">
+        <div class="modal-content detail-modal-content">
+            <span class="close-button" id="detailModalCloseButton">&times;</span>
+            <div class="product-detail-container">
+                <div class="product-gallery">
+                    <img id="detailMainImage" src="" alt="Main Product Image">
+                    <div class="gallery-thumbnails" id="detailThumbnails">
+                        </div>
+                    <button class="gallery-nav prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="gallery-nav next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="product-detail-info">
+                    <h2 id="detailProductName"></h2>
+                    <p class="detail-category" id="detailProductCategory"></p>
+                    <p class="detail-price" id="detailProductPrice"></p>
+                    <p class="detail-description" id="detailProductDescription"></p>
+                    <p class="detail-stock" id="detailProductStock"></p>
+                    <button id="contactOwnerButton" class="contact-button">
+                        <i class="fab fa-whatsapp"></i> Hubungi Penjual via WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="editModalCloseButton">&times;</span>
+            <h2 id="editModalTitle">Edit Detail Produk</h2>
+            <form id="editForm">
+                <input type="hidden" id="editProductId">
+
+                <label for="editProductName">Nama Produk:</label>
+                <input type="text" id="editProductName" required>
+
+                <label for="editProductImageFile">Upload Gambar Utama:</label>
+                <input type="file" id="editProductImageFile" accept="image/*">
+                <img id="editProductImagePreview" src="" alt="Preview Gambar Utama" style="max-width: 100px; max-height: 100px; margin-top: 5px; display: none;">
+                <p style="font-size: 0.8em; color: #777; margin-bottom: 15px;">*Abaikan jika tidak ingin mengubah gambar utama.</p>
+
+
+                <label for="editProductImagesGalleryFiles">Upload Galeri Gambar (Bisa pilih banyak):</label>
+                <input type="file" id="editProductImagesGalleryFiles" accept="image/*" multiple>
+                <div id="editProductImagesGalleryPreview" style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; margin-bottom: 15px;">
+                    </div>
+                <p style="font-size: 0.8em; color: #777; margin-bottom: 15px;">*Abaikan jika tidak ingin mengubah galeri gambar. Jika upload, akan mengganti yang lama.</p>
+
+
+                <label for="editProductDescription">Deskripsi Produk:</label>
+                <textarea id="editProductDescription" rows="4" required></textarea>
+
+                <label for="editProductPrice">Harga:</label>
+                <input type="number" id="editProductPrice" min="0" required>
+
+                <label for="editProductCategory">Kategori:</label>
+                <select id="editProductCategory" required>
+                    <option value="all">Semua</option>
+                    <option value="baju">Baju</option>
+                    <option value="celana">Celana</option>
+                    <option value="jaket">Jaket</option>
+                    <option value="topi">Topi</option>
+                </select>
+
+                <label for="editProductStock">Stok Produk:</label>
+                <input type="number" id="editProductStock" min="0" value="0" required>
+
+                <button type="submit" id="saveProductButton">Simpan Perubahan</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="loginModalCloseButton">&times;</span>
+            <h2>Login Owner</h2>
+            <form id="loginForm">
+                <label for="ownerEmail">Email:</label>
+                <input type="email" id="ownerEmail" required>
+
+                <label for="ownerPassword">Password:</label>
+                <input type="password" id="ownerPassword" required>
+
+                <p id="loginMessage" class="error-message"></p>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="confirmDeleteModal" class="modal">
+        <div class="modal-content small-modal-content">
+            <h2>Konfirmasi Hapus Produk</h2>
+            <p>Anda yakin ingin menghapus produk <strong id="productToDeleteName"></strong> ini?</p>
+            <div class="modal-actions">
+                <button id="cancelDeleteButton" class="action-button secondary">Batal</button>
+                <button id="confirmDeleteButton" class="action-button danger">Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

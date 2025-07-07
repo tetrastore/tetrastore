@@ -1,0 +1,1001 @@
+/* General Styling (Sama seperti sebelumnya) */
+:root {
+    --primary-color: #333333; /* Dark Gray/Near Black */
+    --primary-dark: #1a1a1a; /* Even darker black */
+    --secondary-color: #6c757d; /* Medium Gray/Silver-ish */
+    --accent-color: #ADB5BD; /* Lighter Gray/Silver */
+    --text-color: #333;
+    --light-text-color: #666;
+    --white: #fff;
+    --gray-light: #f8f9fa; /* Very light gray */
+    --gray-medium: #e9ecef; /* Slightly darker light gray */
+    --gray-dark: #495057; /* Darker gray for some text */
+    --border-color: #dee2e6; /* Light border */
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --hover-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--gray-light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color var(--transition-speed) ease;
+}
+
+/* Header (Sama seperti sebelumnya, warna abu-abu) */
+.header {
+    background-color: #808080; /* Abu-abu */
+    color: var(--white); /* Warna teks tetap putih untuk kontras */
+    padding: 15px 0;
+    box-shadow: var(--shadow); /* Gunakan kembali shadow default atau sesuaikan */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px; /* Spacing between elements */
+}
+
+.logo a {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--white); /* Pastikan logo tetap terlihat */
+}
+
+.search-and-category {
+    display: flex;
+    gap: 10px;
+    flex-grow: 1; /* Allows it to take available space */
+    max-width: 600px; /* Limit width */
+}
+
+.search-bar {
+    display: flex;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.search-bar input {
+    border: none;
+    padding: 10px;
+    flex-grow: 1;
+    font-size: 0.95em;
+    outline: none;
+    color: var(--text-color); /* Pastikan teks input terlihat */
+}
+
+.search-bar button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 10px 15px;
+    border-radius: 0; /* Remove border-radius for button in search bar */
+}
+
+.search-bar button:hover {
+    background-color: var(--primary-dark);
+}
+
+.category-select select {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--white); /* Atur background select agar kontras */
+    font-size: 0.95em;
+    cursor: pointer;
+    outline: none;
+    color: var(--text-color); /* Pastikan teks select terlihat */
+}
+
+.owner-contact .contact-us-button {
+    background-color: #25D366; /* WhatsApp green */
+    color: var(--white);
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.owner-contact .contact-us-button:hover {
+    background-color: #1DA851;
+    text-decoration: none;
+}
+
+/* Screen reader only for accessibility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    padding: 20px 0;
+    transition: margin-top var(--transition-speed) ease; /* For search active state */
+}
+
+/* Promotion Slider */
+.promotion-slider {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 30px;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    background-color: var(--white); /* Fallback */
+    aspect-ratio: 16 / 5; /* Maintain aspect ratio (e.g., 1200x375) */
+    display: block; /* Default to block */
+
+    /* Tambahan untuk animasi tombol slider */
+    transition: box-shadow var(--transition-speed) ease; /* Untuk transisi shadow saat hover */
+}
+
+.promotion-slider.hidden {
+    display: none; /* Hide when search is active or in sort mode */
+}
+
+.slider-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 100%; /* Ensure wrapper takes full height of container */
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the slide area */
+    border-radius: var(--border-radius);
+}
+
+/* --- Perubahan Desain Tombol Slider --- */
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.3); /* Sedikit transparan */
+    color: var(--white);
+    border: none;
+    padding: 12px 18px; /* Ukuran yang sedikit lebih besar */
+    cursor: pointer;
+    font-size: 1.5em; /* Ukuran ikon */
+    border-radius: 50%; /* Bentuk lingkaran */
+    z-index: 10;
+    opacity: 0; /* Mulai dengan transparan (tersembunyi) */
+    transition: opacity var(--transition-speed) ease, background-color var(--transition-speed) ease; /* Transisi untuk opacity dan hover */
+    display: flex; /* Untuk menengahkan ikon */
+    align-items: center;
+    justify-content: center;
+}
+
+.slider-nav:hover {
+    background-color: rgba(0, 0, 0, 0.6); /* Lebih gelap saat hover */
+    opacity: 1; /* Pastikan opacity 1 saat hover, meskipun sudah 1 dari parent */
+}
+
+.slider-nav.prev {
+    left: 15px; /* Jarak dari tepi */
+}
+
+.slider-nav.next {
+    right: 15px; /* Jarak dari tepi */
+}
+
+/* Aturan untuk memunculkan tombol saat mouse di atas slider */
+.promotion-slider:hover .slider-nav {
+    opacity: 1; /* Tampilkan tombol saat mouse di atas slider */
+}
+/* --- Akhir Perubahan Desain Tombol Slider --- */
+
+
+.slider-dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.dot.active {
+    background-color: var(--white);
+}
+
+/* Products Section (Sama seperti sebelumnya) */
+.products-section {
+    padding: 20px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--primary-dark);
+    font-size: 2em;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.product-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    position: relative; /* For stock status */
+}
+
+.product-card:hover:not(.dragging) {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px; /* Fixed height for product images */
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.product-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.category-tag {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    font-weight: bold;
+    align-self: flex-start; /* Aligns to the start of the flex item */
+    margin-bottom: 8px;
+}
+
+.product-info h3 {
+    font-size: 1.2em;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.product-info .price {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+}
+
+.product-info .description {
+    font-size: 0.9em;
+    color: var(--light-text-color);
+    margin-bottom: 15px;
+    flex-grow: 1; /* Allows description to take up available space */
+    /* Limit to a few lines if desired */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto; /* Push actions to the bottom */
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+}
+
+.detail-button,
+.edit-button,
+.delete-button {
+    flex: 1; /* Allow buttons to grow and shrink */
+    min-width: 100px; /* Minimum width for buttons */
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.detail-button {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.detail-button:hover {
+    background-color: var(--primary-dark);
+}
+
+.edit-button {
+    background-color: var(--secondary-color);
+    color: var(--white);
+}
+
+.edit-button:hover {
+    background-color: #5a6268; /* Darker secondary */
+}
+
+.delete-button {
+    background-color: #dc3545; /* Red */
+    color: var(--white);
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+/* Stock Status */
+.stock-status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    font-weight: bold;
+    color: var(--white);
+    z-index: 2; /* Above image */
+}
+
+.stock-status.in {
+    background-color: #28a745; /* Green for in stock */
+}
+
+.stock-status.out {
+    background-color: #dc3545; /* Red for out of stock */
+}
+
+.product-card.out-of-stock {
+    opacity: 0.7;
+    filter: grayscale(80%);
+}
+
+.product-card.out-of-stock .detail-button {
+    opacity: 0.8;
+    cursor: default;
+    background-color: var(--gray-dark);
+}
+
+.product-card.out-of-stock .detail-button:hover {
+    background-color: var(--gray-dark);
+}
+
+/* Footer (Sama seperti sebelumnya) */
+.footer {
+    background-color: var(--primary-dark); /* Darker black for footer */
+    color: var(--white);
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+    position: relative; /* For login button */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.owner-login-button {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    position: absolute; /* Position relative to footer */
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+}
+
+.owner-login-button:hover {
+    background-color: #5a6268;
+}
+
+/* Owner Mode specific styles */
+body.owner-mode .owner-login-button {
+    background-color: #ffc107; /* Amber for Logout (visible contrast) */
+    color: var(--primary-dark);
+}
+
+body.owner-mode .owner-login-button:hover {
+    background-color: #e0a800;
+}
+
+.owner-actions-top {
+    display: flex;
+    justify-content: flex-start; /* Align to start */
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.action-button {
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color var(--transition-speed) ease, transform 0.2s ease;
+}
+
+.action-button:hover {
+    transform: translateY(-2px);
+}
+
+.action-button.primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.action-button.primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.action-button.secondary {
+    background-color: var(--secondary-color);
+    color: var(--white);
+}
+
+.action-button.secondary:hover {
+    background-color: #5a6268;
+}
+
+.action-button.danger {
+    background-color: #dc3545;
+    color: var(--white);
+}
+
+.action-button.danger:hover {
+    background-color: #c82333;
+}
+
+/* Modals (Sama seperti sebelumnya) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity var(--transition-speed) ease;
+}
+
+.modal.show {
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--white);
+    margin: auto;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--hover-shadow);
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform var(--transition-speed) ease, opacity var(--transition-speed) ease;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    color: var(--primary-dark);
+    text-align: center;
+}
+
+.close-button {
+    color: var(--gray-dark);
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    transition: color var(--transition-speed) ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--text-color);
+}
+
+/* Form Styles inside Modals */
+.modal-content form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--light-text-color);
+}
+
+.modal-content form input[type="text"],
+.modal-content form input[type="email"],
+.modal-content form input[type="password"],
+.modal-content form input[type="number"],
+.modal-content form textarea,
+.modal-content form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; /* Ensures padding doesn't add to total width */
+}
+
+.modal-content form textarea {
+    resize: vertical;
+}
+
+.modal-content form button[type="submit"] {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.modal-content form button[type="submit"]:hover {
+    background-color: var(--primary-dark);
+}
+
+.error-message {
+    color: #dc3545;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Product Detail Modal Specific */
+.detail-modal-content {
+    max-width: 900px;
+    display: flex;
+    flex-direction: column; /* Stack on small screens */
+    gap: 20px;
+    padding: 20px; /* Adjust padding for better look */
+}
+
+.product-detail-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 30px;
+}
+
+.product-gallery {
+    flex: 2; /* Takes more space for image */
+    min-width: 300px; /* Minimum width for the gallery part */
+    position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background-color: var(--gray-light); /* Background for empty space */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-gallery #detailMainImage {
+    width: 100%;
+    max-height: 400px; /* Max height for main image */
+    object-fit: contain; /* Ensure entire image is visible, no cropping */
+    border-radius: var(--border-radius);
+    margin-bottom: 15px;
+    flex-shrink: 0; /* Prevents image from shrinking */
+}
+
+.gallery-thumbnails {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    overflow-x: auto; /* Enable horizontal scrolling for thumbnails */
+    padding-bottom: 5px; /* Space for scrollbar */
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow thumbnails to wrap if too many */
+}
+
+.gallery-thumbnails img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover; /* Crop thumbnails to fit */
+    border: 2px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border-color var(--transition-speed) ease, transform 0.2s ease;
+}
+
+.gallery-thumbnails img:hover,
+.gallery-thumbnails img.active {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* Gallery Navigation (optional, for many thumbnails) */
+.product-gallery .gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: var(--white);
+    padding: 8px 12px;
+    border-radius: 50%;
+    font-size: 1.2em;
+    z-index: 5;
+    display: none; /* Hide by default, show with JS if many thumbnails */
+}
+
+.product-gallery .gallery-nav.prev {
+    left: 5px;
+}
+.product-gallery .gallery-nav.next {
+    right: 5px;
+}
+
+
+.product-detail-info {
+    flex: 3; /* Takes more space for info */
+    min-width: 300px; /* Minimum width for info part */
+    display: flex;
+    flex-direction: column;
+}
+
+.product-detail-info h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    text-align: left; /* Override modal h2 center */
+}
+
+.product-detail-info .detail-category {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: bold;
+    align-self: flex-start;
+    margin-bottom: 15px;
+}
+
+.product-detail-info .detail-price {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--primary-dark);
+    margin-bottom: 15px;
+}
+
+.product-detail-info .detail-description {
+    font-size: 1em;
+    color: var(--light-text-color);
+    margin-bottom: 20px;
+    flex-grow: 1; /* Allow description to push button down */
+}
+
+.product-detail-info .detail-stock {
+    font-size: 1em;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.product-detail-info .detail-stock .stock-status {
+    position: static; /* Override absolute position */
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+
+.contact-button {
+    background-color: #25D366;
+    color: var(--white);
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background-color var(--transition-speed) ease;
+    margin-top: auto; /* Push button to bottom */
+}
+
+.contact-button:hover {
+    background-color: #1DA851;
+}
+
+/* Small Modal Content (for confirmation) */
+.small-modal-content {
+    max-width: 450px;
+    text-align: center;
+}
+
+.small-modal-content h2 {
+    color: #dc3545;
+}
+
+.small-modal-content .modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+/* Drag and Drop Styling for Sort Mode */
+.products-grid.sort-mode .product-card {
+    cursor: grab;
+    border: 2px dashed transparent;
+}
+
+.products-grid.sort-mode .product-card.dragging {
+    opacity: 0.5;
+    border: 2px dashed var(--primary-color);
+    background-color: var(--gray-light);
+}
+
+/* Visual feedback for drag over target */
+.products-grid.sort-mode .product-card.drag-over-highlight {
+    background-color: rgba(51, 51, 51, 0.1); /* Light primary color */
+    border: 2px dashed var(--primary-color);
+}
+
+.products-grid.sort-mode .product-card.drag-enter-target {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 3px var(--primary-color) inset; /* Inset shadow */
+}
+
+
+/* Responsive Adjustments (Sama seperti sebelumnya) */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-and-category {
+        flex-direction: column;
+        width: 100%;
+        max-width: none; /* Remove max-width on smaller screens */
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+
+    .category-select select {
+        width: 100%;
+    }
+
+    .owner-contact {
+        width: 100%;
+        text-align: center;
+    }
+
+    .owner-contact .contact-us-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+    }
+
+    .product-card img {
+        height: 150px;
+    }
+
+    .product-info h3 {
+        font-size: 1.1em;
+    }
+
+    .product-info .price {
+        font-size: 1em;
+    }
+
+    .detail-modal-content {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .product-detail-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .product-detail-info h2 {
+        font-size: 1.5em;
+    }
+
+    .product-detail-info .detail-price {
+        font-size: 1.4em;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+
+    .owner-login-button {
+        position: static;
+        transform: none;
+        margin-top: 10px;
+    }
+
+    .owner-actions-top {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 10px 0;
+    }
+
+    .logo a {
+        font-size: 1.5em;
+    }
+
+    .search-bar input,
+    .category-select select,
+    .search-bar button {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+
+    .promotion-slider {
+        margin-bottom: 20px;
+        border-radius: 0; /* Remove border radius on very small screens */
+    }
+
+    .slider-nav {
+        padding: 10px 8px;
+        font-size: 1.2em;
+    }
+
+    .products-section {
+        padding: 15px 0;
+    }
+
+    .section-title {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .product-info {
+        padding: 10px;
+    }
+
+    .product-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .detail-button, .edit-button, .delete-button {
+        width: 100%;
+    }
+
+    .modal-content {
+        padding: 15px;
+    }
+
+    .close-button {
+        font-size: 24px;
+        top: 5px;
+        right: 10px;
+    }
+
+    .modal-content h2 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+}
